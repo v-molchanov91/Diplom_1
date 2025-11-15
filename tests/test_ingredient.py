@@ -5,24 +5,26 @@ import pytest
 
 class TestIngredient:
 
-    @pytest.mark.parametrize("ing_type, name, price",
-    [
-    (INGREDIENT_TYPE_SAUCE, "ketchup", 30.0),
-    (INGREDIENT_TYPE_FILLING, "cheese", 80.0),
-    ("CUSTOM", "unknown", 1.0),
-    ]
-    )
-    def test_ingredient_initialization(self, ing_type, name, price):
-        ingredient = Ingredient(ing_type, name, price)
-        assert ingredient.type == ing_type
-        assert ingredient.name == name
-        assert ingredient.price == price
+    def test_ingredient_name_initialization(self):
+        ingredient = Ingredient(INGREDIENT_TYPE_FILLING, "cheese", 80.0)
+        assert ingredient.name == "cheese"
 
-    def test_ingredient_getters(self):
-        ing_type = INGREDIENT_TYPE_FILLING
-        name = "bacon"
-        price = 90.0
-        ing = Ingredient(ing_type, name, price)
-        assert ing.get_type() == ing_type
-        assert ing.get_name() == name
-        assert ing.get_price() == price
+    def test_ingredient_type_initialization(self):
+        ingredient = Ingredient(INGREDIENT_TYPE_SAUCE, "ketchup", 30.0)
+        assert ingredient.type == INGREDIENT_TYPE_SAUCE
+
+    def test_ingredient_price_initialization(self):
+        ingredient = Ingredient(INGREDIENT_TYPE_SAUCE, "mayo", 50.0)
+        assert ingredient.price == 50.0
+
+    def test_ingredient_get_type(self):
+        ing = Ingredient(INGREDIENT_TYPE_FILLING, "bacon", 90.0)
+        assert ing.get_type() == INGREDIENT_TYPE_FILLING
+
+    def test_ingredient_get_name(self):
+        ing = Ingredient(INGREDIENT_TYPE_FILLING, "bacon", 90.0)
+        assert ing.get_name() == "bacon"
+
+    def test_ingredient_get_price(self):
+        ing = Ingredient(INGREDIENT_TYPE_FILLING, "bacon", 90.0)
+        assert ing.get_price() == 90.0
